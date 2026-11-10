@@ -1,0 +1,8 @@
+{
+  "active_after_failover": "app-2",
+  "served_after_failure": "service-ready",
+  "failover_ms": 0.003,
+  "backup_checksum_verified": true,
+  "restore_ms": 0.1036,
+  "backup_checksum": "ad8dd7582b5c"
+}

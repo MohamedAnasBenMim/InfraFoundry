@@ -1,0 +1,12 @@
+- name: Install daily backup job
+  ansible.builtin.cron:
+    name: infrafoundry application backup
+    minute: '15'
+    hour: '2'
+    job: '/usr/local/bin/infrafoundry-backup'
+
+- name: Install backup command
+  ansible.builtin.copy:
+    src: ../../../scripts/backup.sh
+    dest: /usr/local/bin/infrafoundry-backup
+    mode: '0750'

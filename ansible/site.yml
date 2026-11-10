@@ -1,0 +1,15 @@
+- name: Harden all Linux hosts
+  hosts: all
+  become: true
+  roles: [common]
+
+- name: Configure application nodes
+  hosts: app
+  become: true
+  serial: 1
+  roles: [app, backup]
+
+- name: Configure load balancers
+  hosts: load_balancer
+  become: true
+  roles: [haproxy]

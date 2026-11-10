@@ -1,0 +1,30 @@
+- name: Install HAProxy
+  ansible.builtin.package:
+    name: haproxy
+    state: present
+
+- name: Deploy HAProxy configuration
+  ansible.builtin.copy:
+    dest: /etc/haproxy/haproxy.cfg
+    mode: '0644'
+    content: |
+      global
+        log /dev/log local0
+      defaults
+        mode http
+        timeout connect 5s
+        timeout client 30s
+        timeout server 30s
+      frontend web
+        bind *:80
+        default_backend apps
+      backend apps
+        option httpchk GET /health
+        server app1 10.50.1.11:80 check
+        server app2 10.50.1.12:80 check backup
+
+- name: Ensure HAProxy is running
+  ansible.builtin.service:
+    name: haproxy
+    state: started
+    enabled: true

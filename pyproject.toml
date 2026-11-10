@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "infrafoundry"
+version = "1.0.0"
+description = "Automated high-availability Linux lab with failover, backup, and restore verification."
+readme = "README.md"
+requires-python = ">=3.11"
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-cov>=5.0", "ruff>=0.8", "pyyaml>=6.0"]
+[project.scripts]
+infrafoundry-demo = "infrafoundry.demo:main"
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --cov=infrafoundry --cov-report=term-missing --cov-fail-under=90"
+[tool.coverage.run]
+omit = ["src/infrafoundry/demo.py"]
+[tool.ruff]
+line-length = 100
+target-version = "py311"

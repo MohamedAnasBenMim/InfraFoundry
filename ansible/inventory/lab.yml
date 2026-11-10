@@ -1,0 +1,14 @@
+all:
+  vars:
+    ansible_user: automation
+  children:
+    load_balancer:
+      hosts:
+        lb-1: {ansible_host: 10.50.0.10}
+    app:
+      hosts:
+        app-1: {ansible_host: 10.50.1.11}
+        app-2: {ansible_host: 10.50.1.12}
+    monitoring:
+      hosts:
+        monitor-1: {ansible_host: 10.50.2.20}
